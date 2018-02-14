@@ -23,15 +23,23 @@ public class PropertyCell extends Cell {
 	}
 
 	public int getRent() {
+		int rentToCharge = calculateMonopoliesRent();
+		if(numHouses > 0) {
+			rentToCharge = rent * (numHouses + 1);s
+		}
+		return rentToCharge;
+	}
+
+	/**
+	 * @return
+	 */
+	private int calculateMonopoliesRent() {
 		int rentToCharge = rent;
 		String [] monopolies = theOwner.getMonopolies();
 		for(int i = 0; i < monopolies.length; i++) {
 			if(monopolies[i].equals(colorGroup)) {
 				rentToCharge = rent * 2;
 			}
-		}
-		if(numHouses > 0) {
-			rentToCharge = rent * (numHouses + 1);
 		}
 		return rentToCharge;
 	}
