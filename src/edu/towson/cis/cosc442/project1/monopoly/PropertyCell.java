@@ -25,7 +25,7 @@ public class PropertyCell extends Cell {
 	public int getRent() {
 		int rentToCharge = calculateMonopoliesRent();
 		if(numHouses > 0) {
-			rentToCharge = rent * (numHouses + 1);s
+			rentToCharge = rent * (numHouses + 1);
 		}
 		return rentToCharge;
 	}
