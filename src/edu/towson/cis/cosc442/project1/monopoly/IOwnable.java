@@ -16,4 +16,6 @@ public interface IOwnable {
 
 	void setAvailable(boolean available);
 
+	public abstract void playerMoved(Player player, int playerIndex, GameMaster gameMaster);
+
 }

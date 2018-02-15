@@ -24,4 +24,8 @@ public class CardCell extends Cell {
 	public void setAvailable(boolean available) {
 		this.available = available;
 	}
+
+	public void playerMoved(Player player, int playerIndex, GameMaster gameMaster) {
+		gameMaster.getGUI().setDrawCardEnabled(true);
+	}
 }
