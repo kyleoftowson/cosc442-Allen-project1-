@@ -2,9 +2,18 @@ package edu.towson.cis.cosc442.project1.monopoly;
 
 import junit.framework.TestCase;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UtilityCellTest.
+ */
 public class UtilityCellTest extends TestCase {
+	
+	/** The game master. */
 	GameMaster gameMaster;
 	
+	/* (non-Javadoc)
+	 * @see junit.framework.TestCase#setUp()
+	 */
 	protected void setUp() {
 		gameMaster = GameMaster.instance();
 		gameMaster.setGameBoard(new GameBoardUtility());
@@ -13,6 +22,9 @@ public class UtilityCellTest extends TestCase {
 		gameMaster.setGUI(new MockGUI());
 	}
     
+    /**
+     * Test monopoly.
+     */
     public void testMonopoly() {
         int u1CellIndex = gameMaster.getGameBoard().queryCellIndex("Utility 1");
         gameMaster.movePlayer(0, u1CellIndex);
@@ -23,14 +35,14 @@ public class UtilityCellTest extends TestCase {
         assertFalse(gameMaster.getPlayer(0).canBuyHouse());
     }
 	
+	/**
+	 * Test player action.
+	 */
 	public void testPlayerAction() {
 		UtilityCell cell =
 			(UtilityCell) gameMaster.getGameBoard().queryCell("Utility 1");
-		int cellIndex = gameMaster.getGameBoard().queryCellIndex("Utility 1");
-		gameMaster.movePlayer(0, cellIndex);
+		gameMaster();
 		gameMaster.getPlayer(0).purchase();
-		gameMaster.switchTurn();
-		gameMaster.movePlayer(1, cellIndex);
 		cell.playAction(null);
 		int diceRoll = gameMaster.getUtilDiceRoll();
 		assertEquals(
@@ -41,15 +53,38 @@ public class UtilityCellTest extends TestCase {
 				gameMaster.getPlayer(0).getMoney());
 	}
 
-	public void testPurchaseUtility() {
-		assertEquals(0, gameMaster.getPlayer(0).numberOfUtil());
+	/**
+	 * Game master.
+	 */
+	private void gameMaster() {
 		int cellIndex = gameMaster.getGameBoard().queryCellIndex("Utility 1");
 		gameMaster.movePlayer(0, cellIndex);
+		gameMaster.switchTurn();
+		gameMaster.movePlayer(1, cellIndex);
+	}
+
+	/**
+	 * Test purchase utility.
+	 */
+	public void testPurchaseUtility() {
+		assertEquals(0, gameMaster.getPlayer(0).numberOfUtil());
+		gameMasterMove();
 		gameMaster.getPlayer(0).purchase();
 		assertEquals(1350, gameMaster.getPlayer(0).getMoney());
 		assertEquals(1, gameMaster.getPlayer(0).numberOfUtil());
 	}
 
+	/**
+	 * Game master move.
+	 */
+	private void gameMasterMove() {
+		int cellIndex = gameMaster.getGameBoard().queryCellIndex("Utility 1");
+		gameMaster.movePlayer(0, cellIndex);
+	}
+
+	/**
+	 * Test rent.
+	 */
 	public void testRent() {
 		UtilityCell u1 =
 			(UtilityCell) gameMaster.getGameBoard().queryCell("Utility 1");

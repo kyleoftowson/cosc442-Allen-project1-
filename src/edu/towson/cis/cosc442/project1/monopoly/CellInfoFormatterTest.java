@@ -4,16 +4,27 @@ import edu.towson.cis.cosc442.project1.monopoly.gui.GoCellInfoFormatter;
 import edu.towson.cis.cosc442.project1.monopoly.gui.InfoFormatter;
 import junit.framework.TestCase;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CellInfoFormatterTest.
+ */
 public class CellInfoFormatterTest extends TestCase {
     
+    /**
+     * Test go cell test.
+     */
     public void testGoCellTest() {
         GoCell cell = new GoCell();
         String goLabel = GoCellInfoFormatter.GO_CELL_LABEL;
         assertEquals(goLabel, InfoFormatter.cellInfo(cell));
     }
     
+    /**
+     * Test property cell text.
+     */
     public void testPropertyCellText() {
-        String propertyName = "Blue 1";
+        PropertyCell cell = cell();
+		String propertyName = "Blue 1";
         String propertyColor = "blue";
         String ownerName = "Owner1";
         int numHouses = 2;
@@ -24,14 +35,38 @@ public class CellInfoFormatterTest extends TestCase {
 				"<br>Owner: " + ownerName +
 				"<br>* " + numHouses +
 				"</html>";
-        PropertyCell cell = new PropertyCell();
-        cell.setName(propertyName);
-        cell.setPrice(propertyValue);
-        cell.setColorGroup(propertyColor);
-        Player p = new Player();
-        p.setName(ownerName);
-        cell.setTheOwner(p);
-        cell.setNumHouses(numHouses);
         assertEquals(propertyLabel, InfoFormatter.cellInfo(cell));
     }
+
+	/**
+	 * Cell.
+	 *
+	 * @return the property cell
+	 */
+	private PropertyCell cell() {
+		String propertyName = "Blue 1";
+		String propertyColor = "blue";
+		Player p = p();
+		int numHouses = 2;
+		int propertyValue = 120;
+		PropertyCell cell = new PropertyCell();
+		cell.setName(propertyName);
+		cell.setPrice(propertyValue);
+		cell.setColorGroup(propertyColor);
+		cell.setTheOwner(p);
+		cell.setNumHouses(numHouses);
+		return cell;
+	}
+
+	/**
+	 * P.
+	 *
+	 * @return the player
+	 */
+	private Player p() {
+		String ownerName = "Owner1";
+		Player p = new Player();
+		p.setName(ownerName);
+		return p;
+	}
 }

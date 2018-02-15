@@ -2,25 +2,41 @@ package edu.towson.cis.cosc442.project1.monopoly;
 
 import junit.framework.TestCase;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class RailRoadCellTest.
+ */
 public class RailRoadCellTest extends TestCase {
+	
+	/** The game master. */
 	GameMaster gameMaster;
 	
+	/* (non-Javadoc)
+	 * @see junit.framework.TestCase#setUp()
+	 */
 	protected void setUp() {
+		SetUpGameMaster();
+		gameMaster.setNumberOfPlayers(2);
+	}
+
+	/**
+	 * Sets the up game master.
+	 */
+	private void SetUpGameMaster() {
 		gameMaster = GameMaster.instance();
 		gameMaster.setGameBoard(new GameBoardRailRoad());
-		gameMaster.setNumberOfPlayers(2);
 		gameMaster.reset();
 		gameMaster.setGUI(new MockGUI());
 	}
 	
+	/**
+	 * Test player action.
+	 */
 	public void testPlayerAction() {
 		RailRoadCell cell =
 			(RailRoadCell) gameMaster.getGameBoard().queryCell("Railroad A");
-		int cellIndex = gameMaster.getGameBoard().queryCellIndex("Railroad A");
-		gameMaster.movePlayer(0, cellIndex);
+		gameMaster();
 		gameMaster.getPlayer(0).purchase();
-		gameMaster.switchTurn();
-		gameMaster.movePlayer(1, cellIndex);
 		cell.playAction(null);
 		assertEquals(
 				1500 - cell.getRent(),
@@ -29,16 +45,39 @@ public class RailRoadCellTest extends TestCase {
 				1300 + cell.getRent(),
 				gameMaster.getPlayer(0).getMoney());
 	}
-	
-	public void testPurchaseRailroad() {
-		assertEquals(0, gameMaster.getPlayer(0).numberOfRR());
+
+	/**
+	 * Game master.
+	 */
+	private void gameMaster() {
 		int cellIndex = gameMaster.getGameBoard().queryCellIndex("Railroad A");
 		gameMaster.movePlayer(0, cellIndex);
+		gameMaster.switchTurn();
+		gameMaster.movePlayer(1, cellIndex);
+	}
+	
+	/**
+	 * Test purchase railroad.
+	 */
+	public void testPurchaseRailroad() {
+		assertEquals(0, gameMaster.getPlayer(0).numberOfRR());
+		gameMasterMovePlayer();
 		gameMaster.getPlayer(0).purchase();
 		assertEquals(1300, gameMaster.getPlayer(0).getMoney());
 		assertEquals(1, gameMaster.getPlayer(0).numberOfRR());
 	}
 
+	/**
+	 * Game master move player.
+	 */
+	private void gameMasterMovePlayer() {
+		int cellIndex = gameMaster.getGameBoard().queryCellIndex("Railroad A");
+		gameMaster.movePlayer(0, cellIndex);
+	}
+
+	/**
+	 * Test rent.
+	 */
 	public void testRent() {
 		RailRoadCell rr1 =
 			(RailRoadCell) gameMaster.getGameBoard().queryCell("Railroad A");

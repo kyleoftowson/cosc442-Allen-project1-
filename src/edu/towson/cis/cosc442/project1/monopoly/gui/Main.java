@@ -69,15 +69,23 @@ public class Main {
 //		GameBoard gameBoard = new GameBoardFreeParking();
 
 		master.setGameBoard(gameBoard);
-		int numPlayers = inputNumberOfPlayers(window);
-		for(int i = 0; i < numPlayers; i++) {
-			String name = 
-				JOptionPane.showInputDialog(window, "Please input name for Player " + (i+1));
-			GameMaster.instance().getPlayer(i).setName(name);
-		}
-		window.setupGameBoard(gameBoard);
+		window(window, gameBoard);
 		window.show();
 		master.setGUI(window);
 		master.startGame();
+	}
+
+	private static void window(MainWindow window, GameBoard gameBoard) throws java.awt.HeadlessException {
+		int numPlayers = inputNumberOfPlayers(window);
+		setUpWindow(window, gameBoard, numPlayers);
+	}
+
+	private static void setUpWindow(MainWindow window, GameBoard gameBoard, int numPlayers)
+			throws java.awt.HeadlessException {
+		for (int i = 0; i < numPlayers; i++) {
+			String name = JOptionPane.showInputDialog(window, "Please input name for Player " + (i + 1));
+			GameMaster.instance().getPlayer(i).setName(name);
+		}
+		window.setupGameBoard(gameBoard);
 	}
 }
