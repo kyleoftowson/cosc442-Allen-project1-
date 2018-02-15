@@ -1,5 +1,7 @@
 package edu.towson.cis.cosc442.project1.monopoly;
 
+import javax.swing.JOptionPane;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class JailCell.
@@ -14,13 +16,17 @@ public class JailCell extends Cell {
 	 */
 	public JailCell() {
 		setName("Jail");
+		
 	}
 	
 	/* (non-Javadoc)
 	 * @see edu.towson.cis.cosc442.project1.monopoly.Cell#playAction(java.lang.String)
 	 */
 	public boolean playAction(String msg) {
-	return true;	
+		if(msg!=null&&msg!=""){
+    		JOptionPane.showMessageDialog(null, msg);
+    	}
+		return true;	
 	}
 
 	/* (non-Javadoc)

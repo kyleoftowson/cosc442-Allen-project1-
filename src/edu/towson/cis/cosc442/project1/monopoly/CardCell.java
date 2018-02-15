@@ -1,5 +1,7 @@
 package edu.towson.cis.cosc442.project1.monopoly;
 
+import javax.swing.JOptionPane;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class CardCell.
@@ -28,6 +30,9 @@ public class CardCell extends Cell {
      */
     public boolean playAction(String msg) {
     	
+    	if(msg!=null&&msg!=""){
+    		JOptionPane.showMessageDialog(null, msg);
+    	}
     	return true;
     }
     

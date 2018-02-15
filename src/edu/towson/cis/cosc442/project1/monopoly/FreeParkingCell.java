@@ -1,5 +1,7 @@
 package edu.towson.cis.cosc442.project1.monopoly;
 
+import javax.swing.JOptionPane;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class FreeParkingCell.
@@ -17,6 +19,9 @@ public class FreeParkingCell extends Cell {
 	 * @see edu.towson.cis.cosc442.project1.monopoly.Cell#playAction(java.lang.String)
 	 */
 	public boolean playAction(String msg) {
+		if(msg!=null&&msg!=""){
+    		JOptionPane.showMessageDialog(null, msg);
+    	}
 		return false;
 	}
 
